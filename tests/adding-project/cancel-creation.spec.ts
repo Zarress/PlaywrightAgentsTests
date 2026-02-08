@@ -1,30 +1,27 @@
 // spec: specs/adding-project.md
 // seed: tests/seed.spec.ts
 
-import { test, expect } from '@playwright/test';
+import { test, expect } from '../../fixtures/pages.fixture';
+import { testProjects } from '../../test-data/projects';
 
 test.describe('Scenariusze Dodawania Projektów', () => {
-  test.beforeEach(async ({ page }) => {
-    await page.goto('https://zarress.github.io/Project-Manager-App/');
-  });
-
-  test('Anulowanie tworzenia projektu', async ({ page }) => {
+  test('Anulowanie tworzenia projektu', async ({ homePage, newProjectPage }) => {
     // 1. Kliknij przycisk '+ Add Project'
-    await page.getByRole('button', { name: '+ Add Project' }).click();
+    await homePage.clickAddProject();
     
     // Sprawdź, że formularz został otwarty
-    await expect(page.getByRole('heading', { name: 'Creating a New Project', level: 1 })).toBeVisible();
+    await newProjectPage.verifyFormVisible();
     
     // 2. Wypełnij częściowo formularz: tylko Title: 'Test Cancel'
-    await page.getByRole('textbox', { name: 'Title' }).fill('Test Cancel');
+    await newProjectPage.fillTitle(testProjects.cancelTest.title);
     
     // 3. Kliknij przycisk 'Cancel'
-    await page.getByRole('button', { name: 'Cancel' }).click();
+    await newProjectPage.clickCancel();
     
     // Sprawdź, że formularz został zamknięty i powrócono do głównego widoku
-    await expect(page.getByRole('heading', { name: 'No Project Selected', level: 1 })).toBeVisible();
+    await homePage.verifyNoProjectSelectedVisible();
     
     // 4. Sprawdź, że projekt 'Test Cancel' nie został dodany do listy projektów
-    await expect(page.getByText('Test Cancel')).not.toBeVisible();
+    await homePage.verifyProjectNotVisible(testProjects.cancelTest.title);
   });
 });

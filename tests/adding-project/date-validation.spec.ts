@@ -1,35 +1,32 @@
 // spec: specs/adding-project.md
 // seed: tests/seed.spec.ts
 
-import { test, expect } from '@playwright/test';
+import { test, expect } from '../../fixtures/pages.fixture';
+import { testProjects } from '../../test-data/projects';
 
 test.describe('Scenariusze Dodawania Projektów', () => {
-  test.beforeEach(async ({ page }) => {
-    await page.goto('https://zarress.github.io/Project-Manager-App/');
-  });
-
-  test('Walidacja formatu daty', async ({ page }) => {
+  test('Walidacja formatu daty', async ({ homePage, newProjectPage }) => {
     // 1. Kliknij przycisk '+ Add Project'
-    await page.getByRole('button', { name: '+ Add Project' }).click();
+    await homePage.clickAddProject();
     
     // Sprawdź, że formularz został otwarty
-    await expect(page.getByRole('heading', { name: 'Creating a New Project', level: 1 })).toBeVisible();
+    await newProjectPage.verifyFormVisible();
     
     // 2. Spróbuj wpisać nieprawidłowy format daty w pole Due date
     // HTML5 date input automatycznie waliduje format - nieprawidłowe dane będą odrzucone
     await expect(async () => {
-      await page.getByRole('textbox', { name: 'Due date' }).fill('złaData');
+      await newProjectPage.fillDueDate('złaData');
     }).rejects.toThrow('Malformed value');
     
     // 4. Wpisz prawidłową datę w formacie YYYY-MM-DD
-    await page.getByRole('textbox', { name: 'Due date' }).fill('2026-07-15');
+    await newProjectPage.fillDueDate(testProjects.dateValidation.dueDate);
     
     // 5. Wypełnij Title: 'Test Daty', Description: 'Test walidacji dat' i zapisz projekt
-    await page.getByRole('textbox', { name: 'Title' }).fill('Test Daty');
-    await page.getByRole('textbox', { name: 'Description' }).fill('Test walidacji dat');
-    await page.getByRole('button', { name: 'Save' }).click();
+    await newProjectPage.fillTitle(testProjects.dateValidation.title);
+    await newProjectPage.fillDescription(testProjects.dateValidation.description);
+    await newProjectPage.clickSave();
     
     // Sprawdź, że projekt z prawidłową datą został utworzony
-    await expect(page.getByText('Test Daty')).toBeVisible();
+    await homePage.verifyProjectVisible(testProjects.dateValidation.title);
   });
 });

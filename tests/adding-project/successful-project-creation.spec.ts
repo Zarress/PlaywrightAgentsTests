@@ -1,38 +1,32 @@
 // spec: specs/adding-project.md
 // seed: tests/seed.spec.ts
 
-import { test, expect } from '@playwright/test';
+import { test, expect } from '../../fixtures/pages.fixture';
+import { testProjects } from '../../test-data/projects';
 
 test.describe('Scenariusze Dodawania Projektów', () => {
-  test.beforeEach(async ({ page }) => {
-    await page.goto('https://zarress.github.io/Project-Manager-App/');
-  });
-
-  test('Pomyślne dodanie projektu z wszystkimi polami', async ({ page }) => {
+  test('Pomyślne dodanie projektu z wszystkimi polami', async ({ homePage, newProjectPage, projectDetailsPage }) => {
     // 1. Kliknij przycisk '+ Add Project' z sidebara
-    await page.getByRole('button', { name: '+ Add Project' }).click();
+    await homePage.clickAddProject();
     
-    // 2. Wpisz 'Nowy Projekt Testowy' w polu Title
-    await page.getByRole('textbox', { name: 'Title' }).fill('Nowy Projekt Testowy');
-    
-    // 3. Wpisz 'Opis nowego projektu testowego' w polu Description
-    await page.getByRole('textbox', { name: 'Description' }).fill('Opis nowego projektu testowego');
-    
-    // 4. Wpisz '2026-04-15' w polu Due date
-    await page.getByRole('textbox', { name: 'Due date' }).fill('2026-04-15');
+    // 2-4. Wypełnij formularz i zapisz
+    await newProjectPage.verifyFormVisible();
+    await newProjectPage.fillForm(testProjects.sidebarProject);
     
     // 5. Kliknij przycisk 'Save'
-    await page.getByRole('button', { name: 'Save' }).click();
+    await newProjectPage.clickSave();
     
     // Sprawdź czy projekt został dodany do listy
-    await expect(page.getByText('Nowy Projekt Testowy')).toBeVisible();
+    await homePage.verifyProjectVisible(testProjects.sidebarProject.title);
     
     // 6. Kliknij na nowo utworzony projekt z listy
-    await page.getByText('Nowy Projekt Testowy').click();
+    await homePage.clickProjectByName(testProjects.sidebarProject.title);
     
     // Sprawdź szczegóły projektu
-    await expect(page.getByRole('heading', { name: 'Nowy Projekt Testowy', level: 1 })).toBeVisible();
-    await expect(page.getByText('15 kwi 2026')).toBeVisible();
-    await expect(page.getByText('Opis nowego projektu testowego')).toBeVisible();
+    await projectDetailsPage.verifyProjectDetails({
+      title: testProjects.sidebarProject.title,
+      date: '15 kwi 2026',
+      description: testProjects.sidebarProject.description
+    });
   });
 });
