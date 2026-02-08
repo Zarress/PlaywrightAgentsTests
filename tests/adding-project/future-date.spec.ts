@@ -8,18 +8,14 @@ test.describe('Dodawanie projektów - daty w przyszłości', () => {
   test('Pozwala na utworzenie projektu z datą daleko w przyszłości', async ({ homePage, newProjectPage, projectDetailsPage }) => {
     // Act
     await homePage.clickAddProject();
-    await newProjectPage.createProject({
-      title: 'Projekt dalekiej przyszłości',
-      description: 'Test odległej daty',
-      dueDate: '2030-12-31'
-    });
+    await newProjectPage.createProject(testProjects.futureDate);
     
     // Assert
-    await homePage.clickProjectByName('Projekt dalekiej przyszłości');
+    await homePage.clickProjectByName(testProjects.futureDate.title);
     await projectDetailsPage.verifyProjectDetails({
-      title: 'Projekt dalekiej przyszłości',
+      title: testProjects.futureDate.title,
       date: '31 gru 2030',
-      description: 'Test odległej daty'
+      description: testProjects.futureDate.description
     });
   });
 });

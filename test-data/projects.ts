@@ -33,18 +33,18 @@ export const testProjects = {
     dueDate2: '2026-08-15'
   },
   longTitle: {
-    title: 'To jest bardzo długa nazwa projektu która ma na celu przetestowanie jak aplikacja radzi sobie z długimi tytułami projektów',
-    description: 'Test długiego tytułu',
-    dueDate: '2026-06-01'
+    title: 'To jest bardzo długa nazwa projektu testowego która sprawdza obsługę długich tytułów i czy są jakieś ograniczenia długości nazw projektów w tej aplikacji',
+    description: 'Test długiej nazwy',
+    dueDate: '2026-06-10'
   },
   pastDate: {
-    title: 'Projekt Przeszłość',
-    description: 'Test daty w przeszłości',
-    dueDate: '2020-01-01'
+    title: 'Projekt z przeszłości',
+    description: 'Test daty z przeszłości',
+    dueDate: '2025-01-01'
   },
   futureDate: {
-    title: 'Projekt Przyszłość',
-    description: 'Test dalekiej przyszłości',
-    dueDate: '2050-12-31'
+    title: 'Projekt dalekiej przyszłości',
+    description: 'Test odległej daty',
+    dueDate: '2030-12-31'
   }
 } as const;

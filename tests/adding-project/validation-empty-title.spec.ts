@@ -14,5 +14,8 @@ test.describe('Dodawanie projektów - walidacja pól', () => {
     
     // Cleanup - anuluj operację
     await newProjectPage.clickCancel();
+    
+    // Assert - sprawdź, że projekt nie został dodany
+    await homePage.verifyProjectNotVisible('Test Validation');
   });
 });
