@@ -59,6 +59,11 @@ export class NewProjectPage extends BasePage {
     await expect(this.titleInput).toBeFocused();
   }
 
+  async fillTitleAndCancel(title: string) {
+    await this.fillTitle(title);
+    await this.clickCancel();
+  }
+
   async saveProject(data: { title: string; description: string; dueDate: string }) {
     await this.fillForm(data);
     await this.clickSave();
