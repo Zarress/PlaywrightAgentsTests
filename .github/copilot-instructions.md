@@ -1,3 +1,3 @@
 1. Zawsze sprawdzaj czy testy są zgodne z dokumentacją w `specs/README.md` i odpowiadają opisanym scenariuszom testowym. 
 2. Każdy scenariusz testowy jest opisany w osobnym pliku markdown w folderze np. `specs/adding-project/` z dokładnymi krokami i oczekiwaniami.
-3. Jeżeli chcesz dodać nowy scenariusz testowy lub zmodyfikować istniejący, edytuj odpowiedni plik markdown w folderze `specs/` i opisz dokładnie kroki testowe oraz oczekiwane rezultaty.
+3. Jeżeli dodajesz nowy test lub modyfikujesz istniejący, edytuj odpowiedni plik markdown w folderze `specs/` i opisz dokładnie kroki testowe oraz oczekiwane rezultaty.

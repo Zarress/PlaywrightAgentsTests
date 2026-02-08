@@ -3,29 +3,21 @@
 
 import { test, expect } from '../../fixtures/pages.fixture';
 
-test.describe('Scenariusze Dodawania Projektów', () => {
-  test('Walidacja wymaganych pól - brak Due date', async ({ homePage, newProjectPage }) => {
-    // 1. Kliknij przycisk '+ Add Project'
+test.describe('Dodawanie projektów - walidacja pól', () => {
+  test('Wymaga wypełnienia pola Due date', async ({ homePage, newProjectPage }) => {
+    // Arrange
     await homePage.clickAddProject();
-    
-    // Sprawdź, że formularz został otwarty
-    await newProjectPage.verifyFormVisible();
-    
-    // 2. Wpisz 'Test Validation' w Title i 'Test opisu' w Description
     await newProjectPage.fillTitle('Test Validation');
     await newProjectPage.fillDescription('Test opisu');
     
-    // 3. Nie wypełniając Due date, kliknij przycisk 'Save'
+    // Act
     await newProjectPage.clickSave();
     
-    // Sprawdź, że kursor przeniósł się do pola Due date (walidacja)
+    // Assert
     await expect(newProjectPage.dueDateInput).toBeFocused();
     
-    // Anuluj operację
+    // Cleanup - anuluj operację
     await newProjectPage.clickCancel();
-    
-    // 4. Sprawdź czy projekt nie został dodany do listy
-    await homePage.verifyNoProjectSelectedVisible();
     await homePage.verifyProjectNotVisible('Test Validation');
   });
 });

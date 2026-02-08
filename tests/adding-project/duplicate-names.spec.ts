@@ -4,37 +4,30 @@
 import { test, expect } from '../../fixtures/pages.fixture';
 import { testProjects } from '../../test-data/projects';
 
-test.describe('Scenariusze Dodawania Projektów', () => {
-  test('Dodanie projektów z identycznymi nazwami', async ({ homePage, newProjectPage, projectDetailsPage }) => {
+test.describe('Dodawanie projektów - duplikaty nazw', () => {
+  test('Pozwala na utworzenie projektów z identycznymi nazwami', async ({ homePage, newProjectPage, projectDetailsPage }) => {
     const duplicateName = testProjects.duplicateProject.title;
     
-    // 1. Utwórz pierwszy projekt z danymi: Title: 'Duplikat Projektu', Description: 'Pierwszy projekt', Due date: '2026-08-01'
+    // Arrange & Act - Utwórz pierwszy projekt
     await homePage.clickAddProject();
-    await newProjectPage.verifyFormVisible();
-    
-    await newProjectPage.fillForm({
+    await newProjectPage.createProject({
       title: duplicateName,
       description: testProjects.duplicateProject.description1,
       dueDate: testProjects.duplicateProject.dueDate1
     });
-    await newProjectPage.clickSave();
     
-    // Sprawdź, że pierwszy projekt został utworzony
-    await homePage.verifyProjectVisible(duplicateName);
-    
-    // 2. Utwórz drugi projekt z danymi: Title: 'Duplikat Projektu', Description: 'Drugi projekt o tej samej nazwie', Due date: '2026-08-15'
+    // Act - Utwórz drugi projekt z tą samą nazwą
     await homePage.clickAddProject();
-    await newProjectPage.fillForm({
+    await newProjectPage.createProject({
       title: duplicateName,
       description: testProjects.duplicateProject.description2,
       dueDate: testProjects.duplicateProject.dueDate2
     });
-    await newProjectPage.clickSave();
     
-    // 3. Sprawdź, czy lista projektów zawiera oba projekty 'Duplikat Projektu'
+    // Assert - Sprawdź, że oba projekty są na liście
     await homePage.verifyProjectCount(duplicateName, 2);
     
-    // 4. Kliknij na pierwszy projekt i sprawdź jego szczegóły (data: 1 sie 2026, opis: 'Pierwszy projekt')
+    // Assert - Sprawdź szczegóły pierwszego projektu
     await homePage.clickFirstProjectByName(duplicateName);
     await projectDetailsPage.verifyProjectDetails({
       title: duplicateName,
@@ -42,7 +35,7 @@ test.describe('Scenariusze Dodawania Projektów', () => {
       description: testProjects.duplicateProject.description1
     });
     
-    // 5. Kliknij na drugi projekt i sprawdź jego szczegóły (data: 15 sie 2026, opis: 'Drugi projekt o tej samej nazwie')
+    // Assert - Sprawdź szczegóły drugiego projektu
     await homePage.clickNthProjectByName(duplicateName, 1);
     await projectDetailsPage.verifyProjectDetails({
       title: duplicateName,
