@@ -2,8 +2,17 @@ import { Page, Locator, expect } from '@playwright/test';
 import { BasePage } from './base.page';
 
 export class ProjectDetailsPage extends BasePage {
+  readonly deleteProjectButton: Locator;
+  readonly deleteConfirmYesButton: Locator;
+  readonly deleteConfirmNoButton: Locator;
+  readonly deleteConfirmDialog: Locator;
+
   constructor(page: Page) {
     super(page);
+    this.deleteProjectButton = page.getByRole('button', { name: 'Delete project' });
+    this.deleteConfirmYesButton = page.getByRole('button', { name: 'Yes' });
+    this.deleteConfirmNoButton = page.getByRole('button', { name: 'No' });
+    this.deleteConfirmDialog = page.getByRole('dialog');
   }
 
   getProjectHeading(name: string): Locator {
@@ -26,5 +35,28 @@ export class ProjectDetailsPage extends BasePage {
     await this.verifyProjectHeading(data.title);
     await this.verifyProjectDate(data.date);
     await this.verifyProjectDescription(data.description);
+  }
+
+  async verifyDeleteButtonVisible() {
+    await expect(this.deleteProjectButton).toBeVisible();
+  }
+
+  async clickDeleteProject() {
+    await this.deleteProjectButton.click();
+  }
+
+  async confirmDelete() {
+    await this.deleteConfirmYesButton.click();
+  }
+
+  async cancelDelete() {
+    await this.deleteConfirmNoButton.click();
+  }
+
+  async verifyDeleteConfirmDialog() {
+    await expect(this.deleteConfirmDialog).toBeVisible();
+    await expect(this.page.getByText('Are you sure you want to delete this whole project?')).toBeVisible();
+    await expect(this.deleteConfirmYesButton).toBeVisible();
+    await expect(this.deleteConfirmNoButton).toBeVisible();
   }
 }
