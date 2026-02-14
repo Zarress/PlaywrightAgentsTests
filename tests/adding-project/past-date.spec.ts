@@ -1,5 +1,4 @@
 // spec: specs/adding-project.md
-// seed: tests/seed.spec.ts
 
 import { test, expect } from '../../fixtures/pages.fixture';
 import { testProjects } from '../../test-data/projects';
