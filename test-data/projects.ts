@@ -1,7 +1,9 @@
 export interface ProjectData {
+  id?: string;
   title: string;
   description: string;
   dueDate: string;
+  tasks?: any[];
 }
 
 export const testProjects = {
@@ -46,5 +48,12 @@ export const testProjects = {
     title: 'Projekt dalekiej przyszłości',
     description: 'Test odległej daty',
     dueDate: '2030-12-31'
+  },
+  seedProject: {
+    id: "99a1f607-2851-41fe-abc9-5ba67163ff1b",
+    title: "test title",
+    description: "test description",
+    dueDate: "2026-02-14",
+    tasks: []
   }
 } as const;
