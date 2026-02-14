@@ -55,5 +55,19 @@ export const testProjects = {
     description: "test description",
     dueDate: "2026-02-14",
     tasks: []
+  },
+  secondSeedProject: {
+    id: "a2b3c4d5-6789-4abc-def0-123456789abc",
+    title: "Second Project",
+    description: "Second project description",
+    dueDate: "2026-05-20",
+    tasks: []
+  },
+  thirdSeedProject: {
+    id: "b3c4d5e6-7890-4bcd-ef01-23456789abcd",
+    title: "Third Project",
+    description: "Third project description",
+    dueDate: "2026-06-15",
+    tasks: []
   }
 } as const;

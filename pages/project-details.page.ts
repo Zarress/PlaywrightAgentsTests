@@ -59,4 +59,24 @@ export class ProjectDetailsPage extends BasePage {
     await expect(this.deleteConfirmYesButton).toBeVisible();
     await expect(this.deleteConfirmNoButton).toBeVisible();
   }
+
+  async dismissDialogWithEscape() {
+    await this.page.keyboard.press('Escape');
+  }
+
+  async rapidClickDelete(times: number) {
+    await this.deleteProjectButton.click();
+    for (let i = 1; i < times; i++) {
+      await this.deleteProjectButton.click({ force: true });
+    }
+  }
+
+  async addTask(taskName: string) {
+    await this.page.getByRole('textbox', { name: 'Enter task name' }).fill(taskName);
+    await this.page.getByRole('button', { name: '+ Add Task' }).click();
+  }
+
+  async verifyTaskVisible(taskName: string) {
+    await expect(this.page.getByText(taskName)).toBeVisible();
+  }
 }

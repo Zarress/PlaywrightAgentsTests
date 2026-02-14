@@ -5,12 +5,14 @@ export class HomePage extends BasePage {
   readonly addProjectButton: Locator;
   readonly createNewProjectButton: Locator;
   readonly noProjectSelectedHeading: Locator;
+  readonly projectList: Locator;
 
   constructor(page: Page) {
     super(page);
     this.addProjectButton = page.getByRole('button', { name: '+ Add Project' });
     this.createNewProjectButton = page.getByRole('button', { name: 'Create new project' });
     this.noProjectSelectedHeading = page.getByRole('heading', { name: 'No Project Selected', level: 1 });
+    this.projectList = page.getByRole('complementary').getByRole('list');
   }
 
   async goto() {
@@ -34,7 +36,7 @@ export class HomePage extends BasePage {
   }
 
   getProjectByName(name: string): Locator {
-    return this.page.getByText(name);
+    return this.projectList.getByRole('listitem').filter({ hasText: name });
   }
 
   async clickProjectByName(name: string) {
