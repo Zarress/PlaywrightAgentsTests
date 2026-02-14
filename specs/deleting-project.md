@@ -50,18 +50,18 @@ Plan testów dla funkcjonalności usuwania projektów w aplikacji React Project 
 
 **File:** `tests/deleting-project/delete-project-with-tasks.spec.ts`
 
+**Seed:** Projekt z zadaniami seedowany przez fixture `seedProjectWithTasks` (dane: `testProjects.seedProjectWithTasks` z taskami w localStorage)
+
 **Steps:**
   1. Kliknij na projekt z listy projektów
     - expect: Szczegóły projektu powinny zostać wyświetlone
-  2. Dodaj nowe zadanie do projektu wpisując nazwę zadania w polu "Enter task name ..." i klikając przycisk "+ Add Task"
-    - expect: Zadanie powinno zostać dodane do listy zadań projektu
-  3. Zweryfikuj że zadanie jest widoczne na liście zadań
-    - expect: Dodane zadanie powinno być widoczne w sekcji "Tasks"
-  4. Kliknij przycisk 'Delete project'
+  2. Zweryfikuj że zadania są widoczne na liście zadań
+    - expect: Zadania seedowane w projekcie powinny być widoczne w sekcji "Tasks"
+  3. Kliknij przycisk 'Delete project'
     - expect: Dialog potwierdzenia powinien się pojawić z komunikatem "Are you sure you want to delete this whole project?"
-  5. Kliknij przycisk 'Yes' w dialogu potwierdzenia
+  4. Kliknij przycisk 'Yes' w dialogu potwierdzenia
     - expect: Dialog powinien zostać zamknięty, projekt wraz z zadaniami powinien zniknąć z listy projektów
-  6. Sprawdź listę projektów
+  5. Sprawdź listę projektów
     - expect: Projekt nie powinien znajdować się na liście projektów
 
 #### 1.4. Usunięcie jednego projektu spośród wielu

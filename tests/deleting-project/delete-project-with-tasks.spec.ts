@@ -4,11 +4,11 @@ import { test, expect } from '../../fixtures/pages.fixture';
 import { testProjects } from '../../test-data/projects';
 
 test.describe('Scenariusze Usuwania Projektów', () => {
-  test('Usunięcie projektu z zadaniami', async ({ seedSingleProject, homePage, projectDetailsPage }) => {
+  test('Usunięcie projektu z zadaniami', async ({ seedProjectWithTasks, homePage, projectDetailsPage }) => {
     // Arrange
-    await homePage.clickProjectByName(testProjects.seedProject.title);
-    await projectDetailsPage.addTask('Test task');
-    await projectDetailsPage.verifyTaskVisible('Test task');
+    await homePage.clickProjectByName(testProjects.seedProjectWithTasks.title);
+    await projectDetailsPage.verifyTaskVisible(testProjects.seedProjectWithTasks.tasks[0]);
+    await projectDetailsPage.verifyTaskVisible(testProjects.seedProjectWithTasks.tasks[1]);
 
     // Act
     await projectDetailsPage.clickDeleteProject();
@@ -17,6 +17,6 @@ test.describe('Scenariusze Usuwania Projektów', () => {
 
     // Assert
     await homePage.verifyNoProjectSelectedVisible();
-    await homePage.verifyProjectNotVisible(testProjects.seedProject.title);
+    await homePage.verifyProjectNotVisible(testProjects.seedProjectWithTasks.title);
   });
 });

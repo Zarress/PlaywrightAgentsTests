@@ -9,6 +9,7 @@ type PageFixtures = {
   seedSingleProject: void;
   seedMultipleProjects: void;
   seedThreeProjects: void;
+  seedProjectWithTasks: void;
 };
 
 export const test = base.extend<PageFixtures>({
@@ -43,6 +44,14 @@ export const test = base.extend<PageFixtures>({
     await page.evaluate((projects) => {
       localStorage.setItem('projectList', JSON.stringify(projects));
     }, [testProjects.seedProject, testProjects.secondSeedProject, testProjects.thirdSeedProject]);
+
+    await page.reload();
+    await use();
+  },
+  seedProjectWithTasks: async ({ homePage, page }, use) => {
+    await page.evaluate((projectData) => {
+      localStorage.setItem('projectList', JSON.stringify([projectData]));
+    }, testProjects.seedProjectWithTasks);
 
     await page.reload();
     await use();
