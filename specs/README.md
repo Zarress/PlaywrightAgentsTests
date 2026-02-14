@@ -4,7 +4,7 @@ Dyrektor dla planów testów aplikacji React Project Manager.
 
 ## Application Overview
 
-Aplikacja React Project Manager umożliwia dodawanie nowych projektów poprzez formularz zawierający pola Title, Description i Due date. Wszystkie pola są wymagane i formularz można otworzyć na dwa sposoby - przyciskiem "+ Add Project" z sidebara lub "Create new project" z głównego widoku.
+Aplikacja React Project Manager umożliwia dodawanie projektów oraz przypisanie do nich poszczególnych zadań.
 
 ## Test Architecture
 

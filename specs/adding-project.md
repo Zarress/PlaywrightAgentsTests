@@ -2,6 +2,10 @@
 
 > **Note:** Ogólne informacje o aplikacji i architekturze testów znajdują się w [README.md](README.md)
 
+## Application Overview
+
+Aplikacja React Project Manager umożliwia dodawanie nowych projektów poprzez formularz zawierający pola Title, Description i Due date. Wszystkie pola są wymagane i formularz można otworzyć na dwa sposoby - przyciskiem "+ Add Project" z sidebara lub "Create new project" z głównego widoku.
+
 ## Test Scenarios
 
 ### 1. Scenariusze Dodawania Projektów

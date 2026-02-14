@@ -1,5 +1,7 @@
 # Plan Testów Usuwania Projektów
 
+> **Note:** Ogólne informacje o aplikacji i architekturze testów znajdują się w [README.md](README.md)
+
 ## Application Overview
 
 Plan testów dla funkcjonalności usuwania projektów w aplikacji React Project Manager. Obejmuje scenariusze usuwania pojedynczych projektów, projektów z zadaniami, anulowania usuwania oraz przypadki brzegowe. Wszystkie testy wykorzystują dialog potwierdzenia z przyciskami "Yes" i "No".
