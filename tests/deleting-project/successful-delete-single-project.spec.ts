@@ -5,14 +5,7 @@ import { test, expect } from '../../fixtures/pages.fixture';
 import { testProjects } from '../../test-data/projects';
 
 test.describe('Scenariusze Usuwania Projektów', () => {
-  test('Pomyślne usunięcie pojedynczego projektu', async ({ page, homePage, projectDetailsPage }) => {
-    // sedowanie
-    await page.evaluate((projectData) => {
-      localStorage.setItem('projectList', JSON.stringify([projectData]));
-    }, testProjects.seedProject);
-    
-    await page.reload();
-
+  test('Pomyślne usunięcie pojedynczego projektu', async ({ seedSingleProject, homePage, projectDetailsPage }) => {
     // 1. Kliknij na projekt z listy projektów
     await homePage.clickProjectByName(testProjects.seedProject.title);
 
