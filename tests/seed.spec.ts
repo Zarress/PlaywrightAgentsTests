@@ -9,5 +9,7 @@ test.describe('Seedowanie', () => {
     await page.evaluate((projectData) => {
       localStorage.setItem('projectList', JSON.stringify([projectData]));
     }, testProjects.seedProject);
+    
+    await page.reload();
   });
 });

@@ -32,3 +32,4 @@ Każdy test jest zorganizowany według wzorca **AAA (Arrange-Act-Assert)** dla l
 ## Test Plans
 
 - [adding-project.md](adding-project.md) - Scenariusze dodawania projektów
+- [deleting-project.md](deleting-project.md) - Scenariusze usuwania projektów
